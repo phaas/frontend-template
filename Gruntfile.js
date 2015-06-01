@@ -6,6 +6,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-open');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -81,7 +82,7 @@ module.exports = function(grunt) {
 		watch: {
 			ts: {
 				files: ['app/**/*.ts'],
-				tasks: ['typescript']
+				tasks: ['typescript', 'uglify']
 			},
 			css: {
 				files: ['app/**/*.css'],
@@ -99,10 +100,18 @@ module.exports = function(grunt) {
 			dev: {
 				path: 'http://localhost:8080/index-dev.html'
 			}
+		},
+		uglify: {
+			app: {
+				files: {
+					'web/Application.min.js' : ['web/Application.js']
+				}
+			}
+			
 		}
 	});
 
 
 	grunt.registerTask('default', ['build', 'connect', 'open', 'watch']);
-	grunt.registerTask('build', ['typescript', 'cssmin', 'copy']);
+	grunt.registerTask('build', ['typescript', 'uglify', 'cssmin', 'copy']);
 }

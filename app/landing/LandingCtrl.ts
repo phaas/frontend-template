@@ -5,6 +5,7 @@ module landing {
 
     export interface LandingCtrlScope extends ng.IScope {
         message: string;
+		foo : string;
     }
 
     export class LandingCtrl {
@@ -14,8 +15,8 @@ module landing {
         constructor(
             private $scope: LandingCtrlScope
             ) {
-            $scope.message = 'Hello World!';
+            $scope.message = 'Hello there!!';
+			$scope.foo = '123';
         }
-
     }
 }
